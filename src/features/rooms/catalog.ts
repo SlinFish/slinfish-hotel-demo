@@ -1,0 +1,36 @@
+export const rooms = [
+  {
+    id: "garden",
+    name: "Garden Room",
+    category: "Garden",
+    occupancy: 2,
+    size: "28 m²",
+    priceFrom: 68,
+    description: "A calming retreat overlooking tropical gardens.",
+    features: ["King or twin bed", "Garden terrace", "Breakfast option"],
+    gradient: "garden",
+  },
+  {
+    id: "terrace",
+    name: "Terrace Suite",
+    category: "Suite",
+    occupancy: 3,
+    size: "42 m²",
+    priceFrom: 112,
+    description: "Light-filled interiors with a generous private terrace.",
+    features: ["Private terrace", "Lounge area", "Rain shower"],
+    gradient: "terrace",
+  },
+  {
+    id: "family",
+    name: "Family Residence",
+    category: "Family",
+    occupancy: 4,
+    size: "58 m²",
+    priceFrom: 148,
+    description: "Room to gather, unwind and enjoy a longer stay.",
+    features: ["Two sleeping areas", "Family amenities", "Garden outlook"],
+    gradient: "family",
+  },
+] as const;
+export type RoomId = (typeof rooms)[number]["id"];
