@@ -1,4 +1,5 @@
 "use client";
+import { ArrowIcon } from "@/components/arrow-icon";
 import Link from "next/link";
 import { useState } from "react";
 import { StatusBadge } from "@/features/inquiries/ui/status-badge";
@@ -66,7 +67,9 @@ export default function Staff() {
         </div>
         <div className="staff-nav">
           <Link href="/">← Back to site</Link>
-          <Link href="/staff/demo">Explore the public demo ↗</Link>
+          <Link href="/staff/demo">
+            Explore the public demo <ArrowIcon />
+          </Link>
         </div>
       </div>
       <section className="staff-login">

@@ -1,4 +1,5 @@
 "use client";
+import { ArrowIcon } from "@/components/arrow-icon";
 import Link from "next/link";
 import { useState } from "react";
 import { rooms } from "@/features/rooms/catalog";
@@ -62,7 +63,9 @@ export function DemoDashboard() {
         <div className="sidebar-note">
           <span className="eyebrow">BUILT BY SLINFISH</span>
           <p>A thoughtful guest experience, from first hello.</p>
-          <Link href="/staff">Protected staff access ↗</Link>
+          <Link href="/staff">
+            Protected staff access <ArrowIcon />
+          </Link>
         </div>
       </aside>
       <main id="main-content" className="dashboard-main">
@@ -182,7 +185,7 @@ export function DemoDashboard() {
                         </span>
                         <StatusBadge status={record.status} />
                         <span className="row-arrow" aria-hidden="true">
-                          ↗
+                          <ArrowIcon />
                         </span>
                       </button>
                     </li>

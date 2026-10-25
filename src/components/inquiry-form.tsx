@@ -1,4 +1,5 @@
 "use client";
+import { ArrowIcon } from "@/components/arrow-icon";
 import { useState, type FormEvent } from "react";
 import { rooms } from "@/features/rooms/catalog";
 export function InquiryForm({ selectedRoom }: { selectedRoom?: string }) {
@@ -113,7 +114,10 @@ export function InquiryForm({ selectedRoom }: { selectedRoom?: string }) {
         </label>
       </div>
       <button className="button dark" disabled={state === "loading"}>
-        {state === "loading" ? "Sending…" : "Send an inquiry"} <span>↗</span>
+        {state === "loading" ? "Sending…" : "Send an inquiry"}{" "}
+        <span>
+          <ArrowIcon />
+        </span>
       </button>
       <p className="form-note">
         An inquiry is not a confirmed reservation. Demo only — please do not

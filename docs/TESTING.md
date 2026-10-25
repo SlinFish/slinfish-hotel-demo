@@ -40,3 +40,7 @@ CHROMIUM_PATH=/usr/bin/chromium node tests/browser-smoke.mjs
 ```
 
 Use an installed Chromium path appropriate to your platform. `TEST_BASE_URL` optionally selects a different local server. The script checks demo interactions, reload reset, absence of API requests during demo use, native keyboard focus, room preselection, unauthorized staff denial, invalid guest request validation, and horizontal overflow at desktop/tablet/mobile widths. It does not migrate, write a real inquiry, or require staff credentials. Manual assistive-technology review, photo/crop review and broader browser coverage remain follow-up checks.
+
+### Task 02 visual acceptance
+
+The browser smoke script additionally exercises demo search/filter/status changes at every tested width, native guest-form validation without submitting a valid inquiry, the room navigation link, the skip link, and unauthorized staff PATCH as well as GET. Set `BROWSER_CAPTURE_DIR=/path/outside/the/checkout` to save full-page captures of each route and width. The output directory is optional; no capture files are written by default. See [ACCEPTANCE.md](ACCEPTANCE.md) for the current results and photography-specific limitations.

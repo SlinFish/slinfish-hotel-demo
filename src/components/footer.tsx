@@ -1,3 +1,4 @@
+import { ArrowIcon } from "@/components/arrow-icon";
 import Link from "next/link";
 export function Footer() {
   return (
@@ -18,7 +19,9 @@ export function Footer() {
         <nav aria-label="Footer">
           <Link href="/rooms">Find your room</Link>
           <Link href="/#inquiry">Plan a stay</Link>
-          <Link href="/staff/demo">Explore the staff demo ↗</Link>
+          <Link href="/staff/demo">
+            Explore the staff demo <ArrowIcon />
+          </Link>
           <Link href="/staff">Protected staff access</Link>
         </nav>
       </div>

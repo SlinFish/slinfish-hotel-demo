@@ -1,3 +1,4 @@
+import { ArrowIcon } from "@/components/arrow-icon";
 import Link from "next/link";
 export function Header() {
   return (
@@ -16,7 +17,10 @@ export function Header() {
         <Link href="/#experience">Slow living</Link>
         <Link href="/staff/demo">Staff demo</Link>
         <Link href="/#inquiry" className="nav-cta">
-          Plan your stay <span aria-hidden="true">↗</span>
+          Plan your stay{" "}
+          <span aria-hidden="true">
+            <ArrowIcon />
+          </span>
         </Link>
       </nav>
     </header>

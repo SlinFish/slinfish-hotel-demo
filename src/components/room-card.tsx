@@ -1,3 +1,4 @@
+import { ArrowIcon } from "@/components/arrow-icon";
 import Link from "next/link";
 import { rooms } from "@/features/rooms/catalog";
 import { photography } from "@/features/hotel/photography";
@@ -44,7 +45,9 @@ export function RoomCard({
       )}
       <Link href={`/?room=${room.id}#inquiry`} className="room-inquire">
         Explore a stay <span className="sr-only">in the {room.name}</span>
-        <span aria-hidden="true">↗</span>
+        <span aria-hidden="true">
+          <ArrowIcon />
+        </span>
       </Link>
     </article>
   );

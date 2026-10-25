@@ -1711,3 +1711,10 @@ img {
     transform: none;
   }
 }
+
+/* Vector arrows avoid missing-glyph boxes on systems without symbol fonts. */
+.arrow-icon {
+  display: inline-block;
+  vertical-align: -0.12em;
+  flex-shrink: 0;
+}

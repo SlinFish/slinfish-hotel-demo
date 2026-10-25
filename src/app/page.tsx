@@ -1,3 +1,4 @@
+import { ArrowIcon } from "@/components/arrow-icon";
 import Link from "next/link";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
@@ -34,7 +35,10 @@ export default async function Home({
                 The quiet luxury of feeling at home.
               </p>
               <a className="button cream" href="#inquiry">
-                Find your moment <span aria-hidden="true">↗</span>
+                Find your moment{" "}
+                <span aria-hidden="true">
+                  <ArrowIcon />
+                </span>
               </a>
             </div>
             <div className="hero-bottom">
@@ -72,7 +76,10 @@ export default async function Home({
               SlinFish Software to explore the art of thoughtful hospitality.
             </p>
             <Link href="/rooms" className="text-link">
-              Make yourself at home <span aria-hidden="true">↗</span>
+              Make yourself at home{" "}
+              <span aria-hidden="true">
+                <ArrowIcon />
+              </span>
             </Link>
           </div>
         </section>
@@ -87,7 +94,10 @@ export default async function Home({
               </h2>
             </div>
             <Link className="text-link" href="/rooms">
-              Discover the rooms <span aria-hidden="true">↗</span>
+              Discover the rooms{" "}
+              <span aria-hidden="true">
+                <ArrowIcon />
+              </span>
             </Link>
           </div>
           <div className="room-grid">
@@ -142,7 +152,10 @@ export default async function Home({
               </li>
             </ul>
             <a href="#inquiry" className="text-link">
-              Imagine your stay <span aria-hidden="true">↗</span>
+              Imagine your stay{" "}
+              <span aria-hidden="true">
+                <ArrowIcon />
+              </span>
             </a>
           </div>
         </section>
@@ -188,7 +201,10 @@ export default async function Home({
             </p>
           </div>
           <Link href="/staff/demo" className="button cream">
-            Step inside the staff demo <span aria-hidden="true">↗</span>
+            Step inside the staff demo{" "}
+            <span aria-hidden="true">
+              <ArrowIcon />
+            </span>
           </Link>
         </section>
       </main>
