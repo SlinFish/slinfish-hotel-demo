@@ -13,7 +13,7 @@ export function HotelPhoto({
     return (
       <Image
         src={photo.src}
-        alt={`${photo.alt}. Illustrative photograph; fictional hotel.`}
+        alt={`${photo.alt}. Fictional hotel illustration; not an actual property.`}
         fill
         sizes={sizes}
         preload={preload}
@@ -24,7 +24,7 @@ export function HotelPhoto({
     <div className="photo-pending">
       <span aria-hidden="true">✳</span>
       <span>{photo.label}</span>
-      <small>Illustrative photography pending licensing verification</small>
+      <small>Illustrative image unavailable</small>
     </div>
   );
 }

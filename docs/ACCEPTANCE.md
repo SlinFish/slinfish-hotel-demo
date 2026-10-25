@@ -1,5 +1,7 @@
 # Task 02 visual acceptance — 2026-10-25
 
+> Historical report for the earlier photography-sourcing task. Its placeholder and licensing-blocker findings describe that commit only. The current image branch supplies all five AI-generated illustrations; see [the current image inventory and validation](IMAGES.md).
+
 Base: Phase 1 commit `e0a4e3cedb8235ebc0970f4ac15392d4c936557e` on `codex/feature-hotel-ui-public-demo`. Work is isolated on `codex/hotel-photography-acceptance`.
 
 ## Outcome

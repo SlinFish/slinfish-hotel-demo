@@ -21,9 +21,9 @@ Next.js 16 App Router, React 19, TypeScript, Tailwind CSS 4, Zod, Prisma 6 and P
 
 Responsive layouts include visible keyboard focus, a skip link, labeled controls, textual status badges, live feedback and reduced-motion support.
 
-## Photography and attribution
+## AI-generated illustrative imagery
 
-**Photography is currently blocked.** Asset access initially failed; after image downloads became reachable, source and license pages still returned an authorization response. Image authors and licensing could not be verified. No photographs or fabricated attribution claims were added. Reusable local-image slots, Next.js optimization and honest pending-asset panels are implemented. See [image slots, sources and licensing requirements](docs/IMAGES.md). The visual photography requirement must be completed before presenting this as a finished photography-led portfolio.
+Five local JPEGs illustrate the fictional exterior, three room types and a garden breakfast. They are AI-generated illustrations, not photographs of an actual property. The website discloses this visibly and in image alternative text. Next.js supplies responsive optimized images, with hero preloading and lazy loading for secondary images. See [asset provenance, dimensions and delivery](docs/IMAGES.md).
 
 ## Verification
 
@@ -40,6 +40,6 @@ Generate Prisma client types first if needed. Tests exercise demo operations and
 
 The public marketing website, real guest inquiry use cases, client-only demo and protected operations have separate ownership and data paths. They share presentation where useful without introducing services or a monorepo. See [architecture](docs/ARCHITECTURE.md).
 
-Known limitations: photographs are pending verified licensing; no room availability, confirmed booking, payment, email delivery or real administrator features; public demo state is ephemeral. Token-based staff access and guest submission remain unsuitable for real customer data without the protections in [security](docs/SECURITY.md).
+Known limitations: images and room details are fictional; no room availability, confirmed booking, payment, email delivery or real administrator features; public demo state is ephemeral. Token-based staff access and guest submission remain unsuitable for real customer data without the protections in [security](docs/SECURITY.md).
 
 The suggested next phase is a separately scoped authentication/admin design: managed identity, server sessions, roles, rate limits, audit logging and retention. None is implemented in Phase 1. Do not deploy this demonstration as an operational hotel system.

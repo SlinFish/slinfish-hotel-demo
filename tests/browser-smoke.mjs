@@ -117,6 +117,57 @@ try {
         await page.waitForURL(`${base}/rooms`);
         await page.goto(`${base}/`);
       }
+      if (route === "/" || route === "/rooms") {
+        const expected =
+          route === "/"
+            ? ["hero", "garden", "terrace", "family", "experience"]
+            : ["garden", "terrace", "family"];
+        const images = page.locator("img.hotel-photo");
+        assert.equal(await images.count(), expected.length);
+        for (let index = 0; index < expected.length; index++) {
+          const image = images.nth(index);
+          await image.scrollIntoViewIfNeeded();
+          await image.evaluate((element) => element.decode());
+          const properties = await image.evaluate((element) => ({
+            width: element.naturalWidth,
+            height: element.naturalHeight,
+            alt: element.alt,
+            source: element.currentSrc,
+            sizes: element.sizes,
+            srcset: element.srcset,
+            fit: getComputedStyle(element).objectFit,
+            loading: element.loading,
+            renderedWidth: element.getBoundingClientRect().width,
+            renderedHeight: element.getBoundingClientRect().height,
+          }));
+          assert.ok(properties.width > 0 && properties.height > 0);
+          assert.ok(
+            properties.renderedWidth > 0 && properties.renderedHeight > 0,
+          );
+          assert.match(properties.alt, /AI-generated/);
+          assert.match(properties.alt, /not an actual property/);
+          const source = new URL(properties.source);
+          assert.equal(source.pathname, "/_next/image");
+          assert.equal(
+            source.searchParams.get("url"),
+            `/images/${expected[index]}.jpg`,
+          );
+          assert.ok(properties.sizes && properties.srcset);
+          assert.equal(
+            properties.fit,
+            "cover",
+            "Images must crop without stretching",
+          );
+          if (expected[index] !== "hero")
+            assert.equal(properties.loading, "lazy");
+        }
+        assert.ok(
+          await page
+            .getByText(/Fictional hotel · AI-generated illustrations/)
+            .isVisible(),
+        );
+        await page.evaluate(() => window.scrollTo(0, 0));
+      }
       if (captureDir) {
         const label =
           route === "/" ? "home" : route.slice(1).replaceAll("/", "-");

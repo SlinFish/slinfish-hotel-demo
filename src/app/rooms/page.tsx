@@ -14,8 +14,8 @@ export default function Rooms() {
           </h1>
           <p>Three ways to settle in. One invitation to slow down.</p>
           <p className="form-note">
-            Fictional rooms, illustrative rates and photography. Availability is
-            not shown or guaranteed.
+            Fictional rooms, AI-generated illustrations and illustrative rates.
+            No real property is shown; availability is not guaranteed.
           </p>
         </div>
         <div className="room-grid">

@@ -1,44 +1,37 @@
-# Illustrative photography
+# AI-generated hotel illustrations
 
-The Aster House is fictional. No photograph may be represented as depicting an actual Aster House property, room, amenity or location.
+The Aster House is a fictional demonstration hotel. All five images below are **AI-generated illustrations, not photographs of an actual hotel, room, amenity or location**. They illustrate a design concept and do not establish real availability or property features.
 
-## Current asset blocker
+## Asset inventory
 
-During Phase 1, the cloud proxy initially rejected `images.unsplash.com` with HTTP 403. Draft network additions for `unsplash.com` and `images.unsplash.com` were saved. Subsequent image requests succeeded, but the official license page (`https://unsplash.com/license`), source-photo pages and public search requests returned only `Authorization required`. This prevents verification of original photo attribution and license eligibility. Download access alone does not establish a right to use an image.
+The assets were supplied on `feature/hotel-ai-images` in commit `32b0b1d95b049e89bd0a3b9481984d152b2811c5`. No image binary was changed during the test-fix/integration-validation task. The generation provider, model and prompts are not recorded in the repository; no third-party stock-photo source or license is claimed.
 
-No photographic files have been added, and no image license or attribution is claimed. The design uses clearly labeled, solid-color pending-photography panels rather than synthetic photographs, hotlinks or gradient image imitations. Consequently the mandatory photography deliverable remains incomplete until access and licensing verification are available.
+| Local asset                    | Dimensions | File size     | Illustrative subject                                                |
+| ------------------------------ | ---------- | ------------- | ------------------------------------------------------------------- |
+| `public/images/hero.jpg`       | 1672 × 941 | 417,080 bytes | Tropical hotel entrance at dusk, with fictional Aster House signage |
+| `public/images/garden.jpg`     | 1400 × 933 | 245,299 bytes | White bedding, green accents and a garden patio                     |
+| `public/images/terrace.jpg`    | 1400 × 788 | 215,277 bytes | King bed, seating area and sunset balcony                           |
+| `public/images/family.jpg`     | 1400 × 788 | 224,622 bytes | Two beds and a garden outlook                                       |
+| `public/images/experience.jpg` | 1400 × 788 | 307,433 bytes | Fruit, pastries and coffee at an outdoor garden table               |
 
-## Asset slots
+Total source size: 1,409,711 bytes (about 1.34 MiB). These local files require no external image service. Visual review found no visible people or unrelated brand marks; the hero uses fictional hotel signage.
 
-| Local target                   | Intended subject                           | Required attribution before inclusion                            |
-| ------------------------------ | ------------------------------------------ | ---------------------------------------------------------------- |
-| `public/images/hero.jpg`       | Boutique retreat exterior / lush courtyard | Original photo URL, photographer, license URL and retrieval date |
-| `public/images/garden.jpg`     | Calm bedroom in natural tones              | Same                                                             |
-| `public/images/terrace.jpg`    | Bright suite with seating                  | Same                                                             |
-| `public/images/family.jpg`     | Spacious family accommodation              | Same                                                             |
-| `public/images/experience.jpg` | Peaceful garden / outdoor breakfast space  | Same                                                             |
+## Integration and delivery
 
-After verification, download optimized local images (roughly 1600–2000px hero, 1000–1200px other images; avoid large originals). Record actual sources, authors, exact license terms and any restrictions here; keep any required license notices. Check for identifiable people, branding and property restrictions. Set each `src` and accurate descriptive `alt` in `src/features/hotel/photography.ts` only after the corresponding file exists. Do not infer a photograph's license from a template repository's code license.
+`src/features/hotel/photography.ts` maps the five local paths to descriptive AI-generated alternative text. `HotelPhoto` appends the fictional-property context without calling the illustrations photographs. The homepage uses the hero, all three room images and the breakfast illustration; `/rooms` uses the appropriate three room images.
 
-`HotelPhoto` uses `next/image`, responsive `sizes`, lazy loading for secondary images and hero preloading. No image-domain configuration or remote requests are needed after assets are local. All photography remains explicitly illustrative in the interface.
+`next/image` provides responsive `srcset`/`sizes`, optimized delivery and reserved container dimensions. The hero is preloaded; secondary images are lazy-loaded. Images use `object-fit: cover`, retaining their intrinsic proportions while cropping to the existing responsive containers. The original JPEGs are already bounded to 1400–1672px wide; retain them and let Next generate appropriately sized responses rather than shipping larger originals or introducing a new image dependency.
 
-## Task 02 verification — 2026-10-25
+Visible hero/experience labels, the room catalog notice and the shared footer identify the hotel as fictional and its images as AI-generated illustrations. The guest inquiry disclaimer and public staff-demo isolation remain unchanged.
 
-No photograph was approved, downloaded or added during this task. All five `src` values remain `null`; their Phase 1 placeholders and fictional-hotel disclaimer are preserved.
+## Historical context
 
-| Asset            | Source/photographer/license verification | Outcome                                   |
-| ---------------- | ---------------------------------------- | ----------------------------------------- |
-| `hero.jpg`       | Not established                          | Preserve courtyard/exterior placeholder   |
-| `garden.jpg`     | Not established                          | Preserve bedroom placeholder              |
-| `terrace.jpg`    | Not established                          | Preserve suite placeholder                |
-| `family.jpg`     | Not established                          | Preserve family accommodation placeholder |
-| `experience.jpg` | Not established                          | Preserve garden/breakfast placeholder     |
+Earlier Phase 1/Task 02 work left placeholders because external photograph source/license verification was blocked. That describes those historical commits only. This branch now supplies all five AI-generated assets, so the old missing-image and stock-photo-access blockers do not apply to the current integration. The earlier [Task 02 acceptance report](ACCEPTANCE.md) is retained as a historical record.
 
-Observed provider-level blockers:
+## Integration verification — 2026-10-25
 
-- `https://unsplash.com/license` responds with HTTP 307 to `/.within.website?redir=%2Flicense`; following the redirect produces HTTP 401. Its initial response body is `Authorization required`. A successful image-CDN request does not verify a photo's source, author, free-versus-premium status, or license.
-- `https://www.pexels.com/license/` is denied by the cloud proxy with CONNECT HTTP 403. The required `www.pexels.com`, `pexels.com`, and `images.pexels.com` additions were saved to the environment configuration draft, preserving existing destinations. They are not applied in the observed running policy.
-
-To resume sourcing, review and save those Pexels network additions in environment settings. Recheck access to the original photo and license pages before selecting any assets. If Unsplash remains behind its authorization check, use accessible free Pexels sources or provide the original assets together with verifiable source/license evidence. Do not infer rights, use a template's code license as photo permission, or replace these placeholders until verification succeeds. An absence of visible people or branding is a separate check and does not prove usage rights.
-
-Image crop, aesthetic consistency, recognizable-person/branding review, and optimized JPEG delivery remain **unassessed**, because there are no approved photographs. See [the visual acceptance record](ACCEPTANCE.md) for the independently completed layout and behavior checks.
+- Chromium checked `/`, `/rooms` and `/staff/demo` at 1440, 768 and 390px. All expected images decoded successfully with descriptive AI-generated/property-disclaimer alt text, responsive `sizes`/`srcset`, and `object-fit: cover`; secondary images are lazy-loaded. No horizontal page overflow was found.
+- A sample optimized hero request at 750px with WebP support returned a 750 × 422 WebP of 76,834 bytes, compared with the 417,080-byte source JPEG. This verifies optimized delivery; it is not a Lighthouse/Core Web Vitals benchmark.
+- Captures were retained outside the checkout at `/workspace/acceptance/ai-images/` for desktop/tablet/mobile review. The five source JPEGs remain byte-for-byte identical to the starting commit.
+- The public demo passed its behavior/security checks with an unreachable database URL and no staff token. It made no API requests; unauthenticated staff GET/PATCH returned 401. A separate inspection of four HTML responses and eleven referenced client scripts found no application secret-variable names, database URL or test database marker.
+- Typecheck, all 16 automated tests, lint and production build passed on Node 22.16.0. The focused six-test demo suite also passed on Node 22.23.4. No migrations or deployment were performed.
