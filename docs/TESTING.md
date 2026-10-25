@@ -44,3 +44,9 @@ Use an installed Chromium path appropriate to your platform. `TEST_BASE_URL` opt
 ### Task 02 visual acceptance
 
 The browser smoke script additionally exercises demo search/filter/status changes at every tested width, native guest-form validation without submitting a valid inquiry, the room navigation link, the skip link, and unauthorized staff PATCH as well as GET. Set `BROWSER_CAPTURE_DIR=/path/outside/the/checkout` to save full-page captures of each route and width. The output directory is optional; no capture files are written by default. See [ACCEPTANCE.md](ACCEPTANCE.md) for the current results and photography-specific limitations.
+
+### Node 22.16 test-loader compatibility
+
+The dashboard-render test uses the real Next `Link`, not a mock. Node 22.16's ESM/CommonJS bridge can fail with `Cannot read properties of undefined (reading 'exports')` when `Link` is first loaded after the synchronous TypeScript hooks are registered. The test helper preloads `next/link` through native `createRequire` before installing those hooks. This preserves the actual component and every existing behavior/security assertion without changing dependencies or production navigation. Module paths are normalized so the forbidden-infrastructure assertion also works on Windows.
+
+The failure was reproduced and the fix verified with Node 22.16.0 on Linux, as well as the newer installed Node 22 runtime. A native Windows run remains a platform-specific follow-up check.

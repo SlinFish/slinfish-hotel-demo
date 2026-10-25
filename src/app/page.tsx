@@ -42,7 +42,7 @@ export default async function Home({
               </a>
             </div>
             <div className="hero-bottom">
-              <span>A FICTIONAL BOUTIQUE RETREAT</span>
+              <span>FICTIONAL HOTEL · AI-GENERATED IMAGERY</span>
               <a href="#story">
                 SCROLL TO DISCOVER <span aria-hidden="true">↓</span>
               </a>
@@ -113,7 +113,7 @@ export default async function Home({
               sizes="(max-width: 900px) 100vw, 50vw"
             />
             <span className="image-caption">
-              AN ILLUSTRATIVE VISION OF SLOW LIVING
+              AI-GENERATED · A FICTIONAL RETREAT
             </span>
           </div>
           <div className="experience-content">

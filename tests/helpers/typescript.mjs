@@ -1,8 +1,11 @@
 // Exercise the actual TypeScript modules with the existing Node test runner.
-import { registerHooks } from "node:module";
+import { createRequire, registerHooks } from "node:module";
 import { readFileSync, existsSync } from "node:fs";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import ts from "typescript";
+// Load the real Next Link through native CommonJS before installing the TS hooks.
+// Node 22.16 can otherwise fail in its ESM/CJS bridge when Link requires helpers.
+createRequire(import.meta.url)("next/link");
 const root = new URL("../../", import.meta.url);
 export const loadedModules = new Set();
 registerHooks({
@@ -24,7 +27,8 @@ registerHooks({
   },
   load(url, context, next) {
     if (url.startsWith("file:") && /\.tsx?$/.test(url)) {
-      loadedModules.add(fileURLToPath(url));
+      // Keep module-boundary assertions effective on Windows as well as POSIX.
+      loadedModules.add(fileURLToPath(url).replaceAll("\\", "/"));
       const result = ts.transpileModule(readFileSync(new URL(url), "utf8"), {
         compilerOptions: {
           module: ts.ModuleKind.ESNext,

@@ -28,7 +28,8 @@ export function Footer() {
       <div className="footer-bottom">
         <small>© 2026 SLINFISH SOFTWARE</small>
         <small>
-          Fictional hotel · illustrative imagery & rates · inquiries only
+          Fictional hotel · AI-generated illustrations · illustrative rates ·
+          inquiries only
         </small>
       </div>
     </footer>
