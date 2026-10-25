@@ -22,7 +22,7 @@ Total source size: 1,409,711 bytes (about 1.34 MiB). These local files require n
 
 `next/image` provides responsive `srcset`/`sizes`, optimized delivery and reserved container dimensions. The hero is preloaded; secondary images are lazy-loaded. Images use `object-fit: cover`, retaining their intrinsic proportions while cropping to the existing responsive containers. The original JPEGs are already bounded to 1400–1672px wide; retain them and let Next generate appropriately sized responses rather than shipping larger originals or introducing a new image dependency.
 
-Visible hero/experience labels, the room catalog notice and the shared footer identify the hotel as fictional and its images as AI-generated illustrations. The guest inquiry disclaimer and public staff-demo isolation remain unchanged.
+Detailed fictional-property and AI-image disclosures are centralized on `/about-demo`, linked discreetly from the footer. Descriptive, truthful image alternative text is retained. The guest inquiry disclaimer and public staff-demo isolation remain unchanged.
 
 ## Historical context
 
@@ -35,3 +35,7 @@ Earlier Phase 1/Task 02 work left placeholders because external photograph sourc
 - Captures were retained outside the checkout at `/workspace/acceptance/ai-images/` for desktop/tablet/mobile review. The five source JPEGs remain byte-for-byte identical to the starting commit.
 - The public demo passed its behavior/security checks with an unreachable database URL and no staff token. It made no API requests; unauthenticated staff GET/PATCH returned 401. A separate inspection of four HTML responses and eleven referenced client scripts found no application secret-variable names, database URL or test database marker.
 - Typecheck, all 16 automated tests, lint and production build passed on Node 22.16.0. The focused six-test demo suite also passed on Node 22.23.4. No migrations or deployment were performed.
+
+## Static showcase delivery
+
+`npm run build:demo` copies these five JPEGs unchanged and uses `images.unoptimized` for static hosting. No image optimizer endpoint or paid image service is required; secondary images remain lazy-loaded and use proportional cover cropping in reserved containers. The full server mode retains Next optimization. See CLOUDFLARE.md for the separate public artifact and validation record.

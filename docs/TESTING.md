@@ -50,3 +50,9 @@ The browser smoke script additionally exercises demo search/filter/status change
 The dashboard-render test uses the real Next `Link`, not a mock. Node 22.16's ESM/CommonJS bridge can fail with `Cannot read properties of undefined (reading 'exports')` when `Link` is first loaded after the synchronous TypeScript hooks are registered. The test helper preloads `next/link` through native `createRequire` before installing those hooks. This preserves the actual component and every existing behavior/security assertion without changing dependencies or production navigation. Module paths are normalized so the forbidden-infrastructure assertion also works on Windows.
 
 The failure was reproduced and the fix verified with Node 22.16.0 on Linux, as well as the newer installed Node 22 runtime. A native Windows run remains a platform-specific follow-up check.
+
+## Static public showcase
+
+`npm run build:demo` builds without application secrets or database connectivity, verifies the isolated export and writes `out/`. `npm run preview:demo` serves those files locally with custom 404 handling and the exported header policy. Run `tests/static-browser-smoke.mjs` with the same `PLAYWRIGHT_MODULE`/`CHROMIUM_PATH` settings as the server suite; it defaults to preview port 4173 and accepts `TEST_BASE_URL` and `BROWSER_CAPTURE_DIR`. It checks public pages/refresh, image delivery, centralized disclosures/branding, simulated guest validation without PII collection or persistence, dashboard interactions, absent backend/private routes, internal links and responsive layouts. The normal browser suite still targets a running full Next server and checks protected endpoints.
+
+Four new Node tests cover simulation behavior, the staging allowlist, fail-closed output validation and footer branding. All existing Node tests are retained. See CLOUDFLARE.md for exact host settings and observed results.

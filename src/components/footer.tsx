@@ -11,10 +11,7 @@ export function Footer() {
             </span>{" "}
             THE ASTER HOUSE
           </Link>
-          <p>
-            A quieter pace. A warmer welcome.
-            <br />A fictional boutique retreat by SlinFish Software.
-          </p>
+          <p>A quieter pace. A warmer welcome.</p>
         </div>
         <nav aria-label="Footer">
           <Link href="/rooms">Find your room</Link>
@@ -22,14 +19,14 @@ export function Footer() {
           <Link href="/staff/demo">
             Explore the staff demo <ArrowIcon />
           </Link>
-          <Link href="/staff">Protected staff access</Link>
+          <Link href="/about-demo">About this demo</Link>
         </nav>
       </div>
       <div className="footer-bottom">
-        <small>© 2026 SLINFISH SOFTWARE</small>
+        <small>The Aster House — A fictional hotel concept</small>
         <small>
-          Fictional hotel · AI-generated illustrations · illustrative rates ·
-          inquiries only
+          Designed &amp; developed by{" "}
+          <a href="https://slinfish.github.io/portfolio/">SlinFish Software</a>
         </small>
       </div>
     </footer>

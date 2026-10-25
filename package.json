@@ -10,7 +10,9 @@
     "typecheck": "tsc --noEmit",
     "test": "node --test tests/*.test.mjs",
     "db:generate": "prisma generate",
-    "db:migrate": "prisma migrate dev"
+    "db:migrate": "prisma migrate dev",
+    "build:demo": "node scripts/demo-build.mjs",
+    "preview:demo": "node scripts/serve-demo.mjs"
   },
   "dependencies": {
     "@prisma/client": "^6.16.0",

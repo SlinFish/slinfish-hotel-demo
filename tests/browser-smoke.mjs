@@ -80,7 +80,13 @@ try {
   observingDemo = false;
   for (const width of [1440, 768, 390]) {
     await page.setViewportSize({ width, height: 1000 });
-    for (const route of ["/", "/rooms", "/staff/demo", "/staff"]) {
+    for (const route of [
+      "/",
+      "/rooms",
+      "/about-demo",
+      "/staff/demo",
+      "/staff",
+    ]) {
       observingDemo = route === "/staff/demo";
       const response = await page.goto(`${base}${route}`);
       assert.equal(response.status(), 200, route);
@@ -163,7 +169,7 @@ try {
         }
         assert.ok(
           await page
-            .getByText(/Fictional hotel · AI-generated illustrations/)
+            .getByText(/The Aster House — A fictional hotel concept/)
             .isVisible(),
         );
         await page.evaluate(() => window.scrollTo(0, 0));

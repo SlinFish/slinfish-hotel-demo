@@ -2,6 +2,20 @@
 
 A fictional boutique hotel and hospitality workspace, built as a SlinFish Software portfolio project. Explore a warm ivory, forest-green and muted-gold hotel experience, an inquiry form and a public interactive staff demonstration. Room details and rates are illustrative. An inquiry is **not** a reservation; do not submit real personal information.
 
+## Public static showcase
+
+The public presentation includes `/`, `/rooms`, `/about-demo` and `/staff/demo`. Detailed concept/image disclosures live on the About page; the footer credits [SlinFish Software](https://slinfish.github.io/portfolio/).
+
+```bash
+npm ci
+npm run build:demo
+npm run preview:demo
+```
+
+Publish **only `out/`** when deployment is separately authorized. This allowlisted static mode has no API, operational staff login, database or credentials. The inquiry form uses fixed sample contact details and validates a simulated submission entirely in the browser; nothing is sent or stored. The staff dashboard remains a client-only simulation. The full backend remains available through the normal build below.
+
+See [exact Cloudflare Pages settings and security boundaries](docs/CLOUDFLARE.md). No deployment has been created.
+
 ## Stack and local development
 
 Next.js 16 App Router, React 19, TypeScript, Tailwind CSS 4, Zod, Prisma 6 and PostgreSQL 17 (16+ supported). Use Node.js 22 LTS.
@@ -14,16 +28,17 @@ Next.js 16 App Router, React 19, TypeScript, Tailwind CSS 4, Zod, Prisma 6 and P
 
 ## Explore
 
-- `/`: Hotel story, rooms, imagined experiences and guest inquiry form. Room-card links preselect the requested room in the form.
+- `/`: Hotel story, rooms, imagined experiences and guest inquiry form (simulated in the static showcase). Room-card links preselect the requested room in the form.
 - `/rooms`: Three room types with their original rates, sizes, capacities and amenities.
 - `/staff/demo`: Public workspace with seven entirely invented inquiries, total/new/contacted/closed summaries, search, status filters, inquiry detail, simulated status updates and reset. All changes remain in page memory and reset on reload. No protected API, token, database, email or actual inquiry is used.
-- `/staff`: Separate protected operational inquiry screen. Authorized staff provide their token to use the existing protected API. This is a development convenience, not production authentication.
+- `/about-demo`: Concept, AI imagery, illustrative room data and simulation disclosures.
+- `/staff`: Full application only; separate protected operational inquiry screen. Authorized staff provide their token to use the existing protected API. This is a development convenience, not production authentication.
 
 Responsive layouts include visible keyboard focus, a skip link, labeled controls, textual status badges, live feedback and reduced-motion support.
 
 ## AI-generated illustrative imagery
 
-Five local JPEGs illustrate the fictional exterior, three room types and a garden breakfast. They are AI-generated illustrations, not photographs of an actual property. The website discloses this visibly and in image alternative text. Next.js supplies responsive optimized images, with hero preloading and lazy loading for secondary images. See [asset provenance, dimensions and delivery](docs/IMAGES.md).
+Five local JPEGs illustrate the fictional exterior, three room types and a garden breakfast. They are AI-generated illustrations, not photographs of an actual property. The About page centralizes detailed disclosures, with truthful image alternative text preserved. The full server build provides Next image optimization; the static showcase serves the existing bounded local JPEGs with lazy loading for secondary images. See [asset provenance, dimensions and delivery](docs/IMAGES.md).
 
 ## Verification
 

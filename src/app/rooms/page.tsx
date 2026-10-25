@@ -13,10 +13,6 @@ export default function Rooms() {
             Find your <em>quiet corner.</em>
           </h1>
           <p>Three ways to settle in. One invitation to slow down.</p>
-          <p className="form-note">
-            Fictional rooms, AI-generated illustrations and illustrative rates.
-            No real property is shown; availability is not guaranteed.
-          </p>
         </div>
         <div className="room-grid">
           {rooms.map((room, index) => (
@@ -24,8 +20,7 @@ export default function Rooms() {
           ))}
         </div>
         <p className="catalog-note">
-          Every great stay begins with a conversation. An inquiry is never a
-          confirmed reservation.
+          Every great stay begins with a conversation.
         </p>
       </main>
       <Footer />

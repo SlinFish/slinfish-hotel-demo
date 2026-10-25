@@ -63,8 +63,8 @@ export function DemoDashboard() {
         <div className="sidebar-note">
           <span className="eyebrow">BUILT BY SLINFISH</span>
           <p>A thoughtful guest experience, from first hello.</p>
-          <Link href="/staff">
-            Protected staff access <ArrowIcon />
+          <Link href="/about-demo">
+            About this demo <ArrowIcon />
           </Link>
         </div>
       </aside>
