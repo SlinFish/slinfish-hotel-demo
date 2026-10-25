@@ -1,7 +1,7 @@
 "use client";
 import { ArrowIcon } from "@/components/arrow-icon";
 import { useState, type FormEvent } from "react";
-import { rooms } from "@/features/rooms/catalog";
+import { InquiryFields } from "./inquiry-fields";
 export function InquiryForm({ selectedRoom }: { selectedRoom?: string }) {
   const [state, setState] = useState<"idle" | "loading" | "success" | "error">(
     "idle",
@@ -41,78 +41,7 @@ export function InquiryForm({ selectedRoom }: { selectedRoom?: string }) {
       onSubmit={submit}
       aria-label="Booking inquiry form"
     >
-      <div className="form-grid">
-        <label>
-          Full name
-          <input
-            name="guestName"
-            autoComplete="name"
-            maxLength={100}
-            required
-            minLength={2}
-            placeholder="Your name"
-          />
-        </label>
-        <label>
-          Email address
-          <input
-            name="email"
-            autoComplete="email"
-            maxLength={254}
-            type="email"
-            required
-            placeholder="you@example.com"
-          />
-        </label>
-        <label>
-          Arrival date
-          <input name="checkIn" type="date" required />
-        </label>
-        <label>
-          Departure date
-          <input name="checkOut" type="date" required />
-        </label>
-        <label>
-          Preferred room
-          <select
-            name="roomType"
-            required
-            defaultValue={selectedRoom ?? rooms[0].id}
-          >
-            {rooms.map((r) => (
-              <option value={r.id} key={r.id}>
-                {r.name}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label>
-          Guests
-          <input
-            name="guests"
-            type="number"
-            min="1"
-            max="8"
-            defaultValue="2"
-            required
-          />
-        </label>
-      </div>
-      <label>
-        Anything we should know?
-        <textarea
-          name="message"
-          rows={3}
-          maxLength={1200}
-          placeholder="Tell us about your ideal stay..."
-        />
-      </label>
-      <div className="hidden-field" aria-hidden="true">
-        <label>
-          Website
-          <input name="website" tabIndex={-1} autoComplete="off" />
-        </label>
-      </div>
+      <InquiryFields selectedRoom={selectedRoom} />
       <button className="button dark" disabled={state === "loading"}>
         {state === "loading" ? "Sending…" : "Send an inquiry"}{" "}
         <span>

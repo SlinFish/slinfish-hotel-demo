@@ -33,7 +33,7 @@ export function RoomCard({
         </div>
         <span className="room-rate">
           From <strong>${room.priceFrom}</strong>
-          <small>/ night · illustrative</small>
+          <small>/ night</small>
         </span>
       </div>
       {detailed && (

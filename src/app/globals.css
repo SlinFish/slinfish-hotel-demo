@@ -1718,3 +1718,30 @@ img {
   vertical-align: -0.12em;
   flex-shrink: 0;
 }
+
+.about-demo {
+  max-width: 1000px;
+  margin: auto;
+}
+.about-demo h1 {
+  font-size: clamp(44px, 6vw, 76px);
+  margin: 25px 0;
+  line-height: 1.1;
+}
+.about-demo .about-lead {
+  font-size: 18px;
+}
+.about-demo section {
+  border-top: 1px solid var(--line);
+  margin-top: 38px;
+  padding-top: 30px;
+}
+.about-demo h2 {
+  font-size: 32px;
+  letter-spacing: -0.02em;
+}
+.about-demo a:not(.text-link),
+.footer-bottom a {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
