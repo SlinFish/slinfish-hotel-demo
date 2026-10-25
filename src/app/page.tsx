@@ -1,159 +1,198 @@
 import Link from "next/link";
 import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
 import { InquiryForm } from "@/components/inquiry-form";
+import { RoomCard } from "@/components/room-card";
+import { HotelPhoto } from "@/components/hotel-photo";
+import { photography } from "@/features/hotel/photography";
 import { rooms } from "@/features/rooms/catalog";
-export default function Home() {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<{ room?: string | string[] }>;
+}) {
+  const requested = (await searchParams).room;
+  const selectedRoom = rooms.find((room) => room.id === requested)?.id;
   return (
     <>
       <Header />
-      <main>
-        <section className="hero">
+      <main id="main-content">
+        <section className="hero" aria-labelledby="hero-title">
           <div className="hero-image">
+            <HotelPhoto photo={photography.hero} sizes="100vw" preload />
+            <div className="hero-shade" />
             <div className="hero-copy">
-              <span className="eyebrow light">AN UNHURRIED KIND OF LUXURY</span>
-              <h1>
+              <span className="eyebrow light">A LITTLE CLOSER TO YOURSELF</span>
+              <h1 id="hero-title">
                 Somewhere
                 <br />
-                <em>to simply be.</em>
+                to <em>simply be.</em>
               </h1>
               <p>
-                Thoughtful spaces, warm hospitality, and the freedom to slow
-                down.
+                Thoughtful spaces. Unhurried days.
+                <br />
+                The quiet luxury of feeling at home.
               </p>
-              <a className="hero-link" href="#inquiry">
-                Plan your stay <span>↗</span>
+              <a className="button cream" href="#inquiry">
+                Find your moment <span aria-hidden="true">↗</span>
               </a>
             </div>
-            <div className="hero-stamp">
-              THE ART OF
-              <br />
-              SLOW LIVING
-              <br />
-              <b>✳</b>
+            <div className="hero-bottom">
+              <span>A FICTIONAL BOUTIQUE RETREAT</span>
+              <a href="#story">
+                SCROLL TO DISCOVER <span aria-hidden="true">↓</span>
+              </a>
             </div>
           </div>
         </section>
+        <div className="hospitality-strip">
+          <span>Intimate by design</span>
+          <span aria-hidden="true">✳</span>
+          <span>Inspired by nature</span>
+          <span aria-hidden="true">✳</span>
+          <span>Made for slowing down</span>
+        </div>
         <section id="story" className="intro section">
           <div>
-            <span className="eyebrow">WELCOME TO THE ASTER HOUSE</span>
+            <span className="eyebrow">01 / A WARM WELCOME</span>
             <h2>
               A little more
               <br />
-              <em>than a getaway.</em>
+              than <em>a getaway.</em>
             </h2>
           </div>
-          <div>
+          <div className="intro-copy">
             <p>
-              There are places you visit, and places that stay with you. Aster
-              House is a fictional boutique retreat inspired by intimate
-              hospitality, lush surroundings, and beautifully simple moments.
+              Some places ask you to do more. We imagine a place that invites
+              you to do a little less. A morning with no agenda. A corner to
+              call your own. Time, finally, to just be.
             </p>
             <p className="muted">
-              Designed as a functional web development demonstration by SlinFish
-              Software.
+              The Aster House is a fictional boutique retreat, imagined by
+              SlinFish Software to explore the art of thoughtful hospitality.
             </p>
             <Link href="/rooms" className="text-link">
-              Discover our rooms ↗
+              Make yourself at home <span aria-hidden="true">↗</span>
             </Link>
           </div>
         </section>
         <section className="rooms-section section">
           <div className="section-head">
             <div>
-              <span className="eyebrow">STAY A LITTLE LONGER</span>
+              <span className="eyebrow">02 / YOUR OWN LITTLE CORNER</span>
               <h2>
-                Rooms made
+                Stay for a night.
                 <br />
-                <em>for slowing down.</em>
+                <em>Settle in for a while.</em>
               </h2>
             </div>
             <Link className="text-link" href="/rooms">
-              Explore all rooms ↗
+              Discover the rooms <span aria-hidden="true">↗</span>
             </Link>
           </div>
           <div className="room-grid">
             {rooms.map((room, index) => (
-              <article className="room-card" key={room.id}>
-                <div className={"room-photo " + room.gradient}>
-                  <span className="room-number">0{index + 1} / 03</span>
-                  <span className="room-photo-label">{room.category}</span>
-                </div>
-                <div className="room-info">
-                  <div>
-                    <h3>{room.name}</h3>
-                    <p>
-                      {room.size} · Up to {room.occupancy} guests
-                    </p>
-                  </div>
-                  <Link
-                    href="/#inquiry"
-                    aria-label={"Inquire about " + room.name}
-                  >
-                    ↗
-                  </Link>
-                </div>
-              </article>
+              <RoomCard key={room.id} room={room} index={index} />
             ))}
           </div>
         </section>
         <section id="experience" className="experience">
           <div className="experience-art">
-            <span>✳</span>
+            <HotelPhoto
+              photo={photography.experience}
+              sizes="(max-width: 900px) 100vw, 50vw"
+            />
+            <span className="image-caption">
+              AN ILLUSTRATIVE VISION OF SLOW LIVING
+            </span>
           </div>
           <div className="experience-content">
-            <span className="eyebrow">THE ASTER EXPERIENCE</span>
+            <span className="eyebrow">03 / THE PLEASURE OF LESS</span>
             <h2>
-              Find beauty in
+              Nothing rushed.
               <br />
-              <em>the everyday.</em>
+              <em>Everything felt.</em>
             </h2>
             <p>
-              Slow mornings, thoughtful details, and spaces that make you feel
-              right at home. Our favorite kind of luxury is the kind that lets
-              you unwind.
+              A garden to wander. A quiet place to read. A long breakfast that
+              becomes the best part of your day. Simple pleasures inspire our
+              fictional retreat.
             </p>
+            <ul className="amenity-list">
+              <li>
+                <span aria-hidden="true">✳</span>
+                <div>
+                  <h3>Closer to nature</h3>
+                  <p>Garden outlooks and spaces to pause.</p>
+                </div>
+              </li>
+              <li>
+                <span aria-hidden="true">☼</span>
+                <div>
+                  <h3>Mornings, your way</h3>
+                  <p>A breakfast option for a slower start.</p>
+                </div>
+              </li>
+              <li>
+                <span aria-hidden="true">⌂</span>
+                <div>
+                  <h3>A space for everyone</h3>
+                  <p>From a quiet escape to time together.</p>
+                </div>
+              </li>
+            </ul>
             <a href="#inquiry" className="text-link">
-              Make an inquiry ↗
+              Imagine your stay <span aria-hidden="true">↗</span>
             </a>
           </div>
         </section>
         <section id="inquiry" className="inquiry section">
           <div className="inquiry-copy">
-            <span className="eyebrow">YOUR NEXT CHAPTER</span>
+            <span className="eyebrow">04 / SOMETHING TO LOOK FORWARD TO</span>
             <h2>
-              We saved
+              Your next
               <br />
-              <em>you a place.</em>
+              <em>slow chapter.</em>
             </h2>
             <p>
-              Tell us when you’d like to visit. This demo collects booking
-              inquiries, not confirmed reservations.
+              Tell us a little about the stay you have in mind. Start a
+              conversation, with no reservation confirmed.
             </p>
-            <div className="inquiry-decoration">✳</div>
+            <div className="inquiry-aside">
+              <span aria-hidden="true">✳</span>
+              <p>
+                This is a fictional hotel demonstration.
+                <br />
+                Please use invented details only.
+              </p>
+            </div>
           </div>
           <div className="form-panel">
-            <h3>Start your stay</h3>
-            <p>Share a few details and we&apos;ll take it from there.</p>
-            <InquiryForm />
+            <span className="eyebrow">LET’S BEGIN</span>
+            <h3>A stay worth imagining.</h3>
+            <p>Share a few details in our sample inquiry form.</p>
+            <InquiryForm selectedRoom={selectedRoom} />
           </div>
         </section>
+        <section className="portfolio-callout">
+          <div>
+            <span className="eyebrow light">BEHIND EVERY WARM WELCOME</span>
+            <h2>
+              Thoughtful hospitality.
+              <br />
+              <em>Thoughtful software.</em>
+            </h2>
+            <p>
+              Explore the other side of the experience: a safe, interactive
+              hotel inquiry workspace.
+            </p>
+          </div>
+          <Link href="/staff/demo" className="button cream">
+            Step inside the staff demo <span aria-hidden="true">↗</span>
+          </Link>
+        </section>
       </main>
-      <footer>
-        <div>
-          <strong>✳ THE ASTER HOUSE</strong>
-          <p>
-            A fictional hospitality experience.
-            <br />
-            Built by SlinFish Software.
-          </p>
-        </div>
-        <div>
-  <Link href="/rooms">Rooms</Link>
-  <Link href="/#inquiry">Inquire</Link>
-  <Link href="/staff">Staff demo</Link>
-</div>
-        <small>© 2026 THE ASTER HOUSE · DEMONSTRATION ONLY</small>
-      </footer>
+      <Footer />
     </>
   );
 }
