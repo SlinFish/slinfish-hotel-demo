@@ -1,6 +1,8 @@
 "use client";
+import { ArrowIcon } from "@/components/arrow-icon";
 import Link from "next/link";
 import { useState } from "react";
+import { StatusBadge } from "@/features/inquiries/ui/status-badge";
 type Item = {
   id: string;
   guestName: string;
@@ -56,25 +58,29 @@ export default function Staff() {
     }
   }
   return (
-    <main className="staff-page">
+    <main id="main-content" className="staff-page">
       <div className="staff-top">
         <div>
           <span className="eyebrow">THE ASTER HOUSE / OPERATIONS</span>
           <h1>Inquiry dashboard</h1>
-          <p>
-            Demonstration dashboard. Token-based access is for local demo only.
-          </p>
+          <p>Protected workspace. Authorized staff access is required.</p>
         </div>
-       <Link href="/">← Back to site</Link>
+        <div className="staff-nav">
+          <Link href="/">← Back to site</Link>
+          <Link href="/staff/demo">
+            Explore the public demo <ArrowIcon />
+          </Link>
+        </div>
       </div>
       <section className="staff-login">
         <label>
-          Staff demo token{" "}
+          Staff access token{" "}
           <input
             type="password"
             value={token}
             onChange={(e) => setToken(e.target.value)}
-            placeholder="From STAFF_ACCESS_TOKEN"
+            autoComplete="off"
+            placeholder="Enter your staff access token"
           />
         </label>
         <button
@@ -95,9 +101,7 @@ export default function Staff() {
           <article className="staff-card" key={item.id}>
             <div className="staff-card-top">
               <strong>{item.guestName}</strong>
-              <span className={"status " + item.status.toLowerCase()}>
-                {item.status}
-              </span>
+              <StatusBadge status={item.status} />
             </div>
             <p>{item.email}</p>
             <p>

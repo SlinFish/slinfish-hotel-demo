@@ -1,44 +1,34 @@
-import Link from "next/link";
 import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
+import { RoomCard } from "@/components/room-card";
 import { rooms } from "@/features/rooms/catalog";
 export default function Rooms() {
   return (
     <>
       <Header />
-      <main className="rooms-page section">
-        <span className="eyebrow">ACCOMMODATION</span>
-        <h1>
-          Find your <em>space.</em>
-        </h1>
-        <p className="muted">
-          Three ways to feel at home. Illustrative room details and prices only.
-        </p>
+      <main id="main-content" className="rooms-page section">
+        <div className="catalog-heading">
+          <span className="eyebrow">A ROOM OF YOUR OWN</span>
+          <h1>
+            Find your <em>quiet corner.</em>
+          </h1>
+          <p>Three ways to settle in. One invitation to slow down.</p>
+          <p className="form-note">
+            Fictional rooms, illustrative rates and photography. Availability is
+            not shown or guaranteed.
+          </p>
+        </div>
         <div className="room-grid">
-          {rooms.map((r) => (
-            <article className="room-card" key={r.id}>
-              <div className={"room-photo " + r.gradient}></div>
-              <div className="room-info">
-                <div>
-                  <h3>{r.name}</h3>
-                  <p>{r.description}</p>
-                  <p>
-                    {r.size} · Sleeps {r.occupancy}
-                  </p>
-                  <p>Illustrative rates from ${r.priceFrom}/night</p>
-                  <ul>
-                    {r.features.map((f) => (
-                      <li key={f}>{f}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-              <Link href="/#inquiry" className="button dark">
-                Inquire about this room ↗
-              </Link>
-            </article>
+          {rooms.map((room, index) => (
+            <RoomCard key={room.id} room={room} index={index} detailed />
           ))}
         </div>
+        <p className="catalog-note">
+          Every great stay begins with a conversation. An inquiry is never a
+          confirmed reservation.
+        </p>
       </main>
+      <Footer />
     </>
   );
 }

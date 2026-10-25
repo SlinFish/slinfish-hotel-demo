@@ -1,7 +1,8 @@
 "use client";
+import { ArrowIcon } from "@/components/arrow-icon";
 import { useState, type FormEvent } from "react";
 import { rooms } from "@/features/rooms/catalog";
-export function InquiryForm() {
+export function InquiryForm({ selectedRoom }: { selectedRoom?: string }) {
   const [state, setState] = useState<"idle" | "loading" | "success" | "error">(
     "idle",
   );
@@ -45,6 +46,8 @@ export function InquiryForm() {
           Full name
           <input
             name="guestName"
+            autoComplete="name"
+            maxLength={100}
             required
             minLength={2}
             placeholder="Your name"
@@ -54,6 +57,8 @@ export function InquiryForm() {
           Email address
           <input
             name="email"
+            autoComplete="email"
+            maxLength={254}
             type="email"
             required
             placeholder="you@example.com"
@@ -69,7 +74,11 @@ export function InquiryForm() {
         </label>
         <label>
           Preferred room
-          <select name="roomType" required>
+          <select
+            name="roomType"
+            required
+            defaultValue={selectedRoom ?? rooms[0].id}
+          >
             {rooms.map((r) => (
               <option value={r.id} key={r.id}>
                 {r.name}
@@ -105,7 +114,10 @@ export function InquiryForm() {
         </label>
       </div>
       <button className="button dark" disabled={state === "loading"}>
-        {state === "loading" ? "Sending…" : "Send an inquiry"} <span>↗</span>
+        {state === "loading" ? "Sending…" : "Send an inquiry"}{" "}
+        <span>
+          <ArrowIcon />
+        </span>
       </button>
       <p className="form-note">
         An inquiry is not a confirmed reservation. Demo only — please do not
