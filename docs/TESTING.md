@@ -23,7 +23,7 @@
 
 ## Phase 1 automated checks
 
-Use Node 22.15+ (documented development target: Node 22 LTS). Run `npm run db:generate` before type checking if Prisma client types are missing. Client generation does not migrate or write database records.
+Use Node 22.15+ (documented development target: Node 22 LTS). `npm run typecheck` now runs `prisma generate` before `tsc --noEmit`, including after a clean `npm ci`. Client generation does not connect to the database, migrate or write database records. The separate `db:generate` command remains available for explicit regeneration.
 
 - `npm test` preserves the original scaffold tests and adds behavioral tests against actual TypeScript modules. The test-only loader uses the existing TypeScript dependency and Node `registerHooks`; it is not shipped with the app.
 - Demo tests check fixture consistency, reserved emails, room capacities, every status, case-insensitive search, combined filtering, empty results, immutable updates, summary counts, invalid changes and session reset. Server rendering with a failing fetch function verifies the demo can render without API access, and the loaded module graph excludes database/staff adapters.
@@ -56,3 +56,11 @@ The failure was reproduced and the fix verified with Node 22.16.0 on Linux, as w
 `npm run build:demo` builds without application secrets or database connectivity, verifies the isolated export and writes `out/`. `npm run preview:demo` serves those files locally with custom 404 handling and the exported header policy. Run `tests/static-browser-smoke.mjs` with the same `PLAYWRIGHT_MODULE`/`CHROMIUM_PATH` settings as the server suite; it defaults to preview port 4173 and accepts `TEST_BASE_URL` and `BROWSER_CAPTURE_DIR`. It checks public pages/refresh, image delivery, centralized disclosures/branding, simulated guest validation without PII collection or persistence, dashboard interactions, absent backend/private routes, internal links and responsive layouts. The normal browser suite still targets a running full Next server and checks protected endpoints.
 
 Four new Node tests cover simulation behavior, the staging allowlist, fail-closed output validation and footer branding. All existing Node tests are retained. See CLOUDFLARE.md for exact host settings and observed results.
+
+## Windows preview and clean-install regression checks
+
+The preview maps decoded relative URL segments to an absolute export root, explicitly appending `index.html` for exported page routes. Tests exercise Windows drive/UNC paths, spaces and encoded filenames using `path.win32`; HTTP tests cover a file-URL root, CRLF security headers, navigation/refresh, slash redirects with query strings, HEAD, custom 404s and traversal/symlink rejection. Missing preview configuration produces an actionable error rather than being hidden as an ordinary missing route. The CLI checks all four pages, `404.html` and `_headers` before listening and prints the exact export directory.
+
+The clean-typecheck regression uses an isolated copy of the real Prisma schema with a temporary client output. It reproduces TS7006 with the client absent, executes the repository's typecheck command to generate it, then confirms an invalid inquiry-row property still fails TypeScript. It never runs a query or modifies the shared generated client. A clean `npm ci` followed by typecheck, all tests, lint, normal build and static build is the supported verification sequence. No migrations are required for these checks.
+
+Native Windows execution is not available in the cloud machine. Windows path semantics and cross-platform HTTP behavior are covered here; the exact reported Windows plain-404 symptom was not reproduced natively.

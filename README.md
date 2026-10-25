@@ -49,7 +49,7 @@ npm run lint
 npm run build
 ```
 
-Generate Prisma client types first if needed. Tests exercise demo operations and the existing guest use cases without PostgreSQL; the original scaffold tests remain. See [testing](docs/TESTING.md) for optional automated browser checks and remaining coverage.
+`npm run typecheck` generates Prisma client types before invoking TypeScript, so it works immediately after `npm ci`. Generation needs no database connection and does not run migrations. Tests exercise demo operations and the existing guest use cases without PostgreSQL; the original scaffold tests remain. See [testing](docs/TESTING.md) for optional automated browser checks and remaining coverage.
 
 ## Boundaries and next steps
 

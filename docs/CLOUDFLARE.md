@@ -56,7 +56,7 @@ npm run build:demo
 npm run preview:demo
 ```
 
-The preview binds loopback port 4173 by default (`PORT` overrides it), serves only `out/`, and returns custom 404s rather than an SPA fallback. It is a local filesystem preview, not a complete Cloudflare emulator.
+The preview binds loopback port 4173 by default (`PORT` overrides it), prints its absolute export directory, serves only `out/`, and returns custom 404s rather than an SPA fallback. It validates the export at startup and uses explicit cross-platform URL-to-file mapping; `/rooms`, `/about-demo` and `/staff/demo` redirect to their trailing-slash forms. Missing policy/configuration errors are reported separately from route 404s. It is a local filesystem preview, not a complete Cloudflare emulator.
 
 Use an externally installed Playwright runtime, as described in TESTING.md:
 
@@ -80,3 +80,9 @@ The static browser suite checks all four pages and refreshes at 1440, 768 and 39
 After publication is separately approved, verify the actual Pages URL for route refresh, 404 status codes, security headers, asset delivery and interactive behavior. Do not enable operational endpoints or add credentials to remedy static preview issues.
 
 References: [Pages build image/settings](https://developers.cloudflare.com/pages/configuration/build-image/), [serving pages and 404 behavior](https://developers.cloudflare.com/pages/configuration/serving-pages/). Official documentation was consulted during preparation.
+
+## Clean-install verification update — 2026-10-26
+
+`npm run typecheck` generates the Prisma client before TypeScript, fixing missing-client TS7006 errors after `npm ci`. Generation requires no database connection and runs no migrations. This changes only the full application verification workflow; `build:demo` still does not invoke Prisma generation or use application credentials. The preview's Windows path/URL handling and diagnostics now have dedicated regression coverage; hosting settings and static exclusion boundaries are unchanged.
+
+Verification on 2026-10-26: clean `npm ci`, typecheck, all 25 tests, lint, normal build and static demo build passed. The Chromium static suite also passed through `localhost:4173`, including direct navigation/refresh, slash handling, all public interactions and operational/private-route 404s. Native Windows execution remains unavailable; Windows drive/UNC semantics and portable HTTP behavior are covered by regression tests.
