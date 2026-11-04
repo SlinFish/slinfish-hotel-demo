@@ -14,7 +14,7 @@ const unavailable = "The local assistant is unavailable. Please try again later.
 const preview = "This is an offline chat preview. No message was sent to an AI service. Connect the local AI Assistant to test live conversations.";
 const maxLength = 1000;
 
-export function HospitalityChat({ mode = "connected" }: { mode?: Mode }) {
+export function HospitalityChat({ mode = "connected", inquiryEnabled = false }: { mode?: Mode; inquiryEnabled?: boolean }) {
   const [open, setOpen] = useState(false);
   const [entries, setEntries] = useState<Entry[]>([{ role: "assistant", text: welcome }]);
   const [draft, setDraft] = useState("");
@@ -114,7 +114,7 @@ export function HospitalityChat({ mode = "connected" }: { mode?: Mode }) {
             {busy && <p className="hospitality-chat-assistant">Checking approved hotel information…</p>}
             <div ref={endRef} />
           </div>
-          {mode === "connected" && <FictionalChatInquiry />}
+          {mode === "connected" && inquiryEnabled && <FictionalChatInquiry />}
           <form onSubmit={submit} className="hospitality-chat-composer">
             <label htmlFor="hospitality-chat-input" className="sr-only">Your hotel question</label>
             <input
