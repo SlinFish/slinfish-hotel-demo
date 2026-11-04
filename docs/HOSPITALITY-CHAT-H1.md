@@ -30,10 +30,10 @@ npm run typecheck
 npm test
 npm run lint
 npm run build:demo
-npm run dev
+npm run dev -- -p 3001
 ```
 
-Open the local Next.js URL displayed by `npm run dev` (typically http://localhost:3000). **Note**: port 3000 belongs to the AI Assistant; set the hotel development server explicitly to port 3001 with `npm run dev -- -p 3001` rather than allowing a port conflict.
+Open http://localhost:3001 for the Hotel Demo. Port 3000 belongs to the separate AI Assistant.
 
 With both running, test these fictional questions in the homepage chat:
 - "How do I book a room?" → approved dates/guest-count response.
