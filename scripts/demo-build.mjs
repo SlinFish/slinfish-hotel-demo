@@ -27,7 +27,9 @@ export const demoFiles = [
     "hotel-photo",
     "room-card",
     "inquiry-fields",
+    "hospitality-chat",
   ].map((name) => `src/components/${name}.tsx`),
+  "src/components/hospitality-chat.css",
   "src/features/hotel/home.tsx",
   "src/features/hotel/photography.ts",
   "src/features/rooms/catalog.ts",
@@ -54,7 +56,7 @@ export async function prepareDemo(root, stage) {
   }
   await writeFile(
     join(stage, "src/app/page.tsx"),
-    'import { HotelHome } from "@/features/hotel/home";\nexport default function Home() { return <HotelHome />; }\n',
+    'import { HotelHome } from "@/features/hotel/home";\nexport default function Home() { return <HotelHome chatMode="preview" />; }\n',
   );
   await writeFile(
     join(stage, "src/components/inquiry-form.tsx"),

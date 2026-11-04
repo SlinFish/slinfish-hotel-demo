@@ -1,13 +1,14 @@
 import { ArrowIcon } from "@/components/arrow-icon";
 import Link from "next/link";
 import { Header } from "@/components/header";
+import { HospitalityChat } from "@/components/hospitality-chat";
 import { Footer } from "@/components/footer";
 import { InquiryForm } from "@/components/inquiry-form";
 import { RoomCard } from "@/components/room-card";
 import { HotelPhoto } from "@/components/hotel-photo";
 import { photography } from "@/features/hotel/photography";
 import { rooms } from "@/features/rooms/catalog";
-export function HotelHome({ selectedRoom }: { selectedRoom?: string }) {
+export function HotelHome({ selectedRoom, chatMode = "connected" }: { selectedRoom?: string; chatMode?: "connected" | "preview" }) {
   return (
     <>
       <Header />
@@ -200,6 +201,7 @@ export function HotelHome({ selectedRoom }: { selectedRoom?: string }) {
         </section>
       </main>
       <Footer />
+      <HospitalityChat mode={chatMode} />
     </>
   );
 }
