@@ -13,7 +13,7 @@ test("H-2 inquiry transport is development-only and never forwards arbitrary bus
   assert.match(code, /consent !== true/);
   assert.match(code, /response\.status === 201/);
   assert.match(code, /stored === true/);
-  assert.match(code, /status: 503/);
+  assert.match(code, /failure\(503,/);
 });
 
 test("H-2 form uses explicit opt-in consent and displays only confirmed stored result", async () => {
