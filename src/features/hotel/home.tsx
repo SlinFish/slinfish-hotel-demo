@@ -201,7 +201,7 @@ export function HotelHome({ selectedRoom, chatMode = "connected" }: { selectedRo
         </section>
       </main>
       <Footer />
-      <HospitalityChat mode={chatMode} />
+      <HospitalityChat mode={chatMode} inquiryEnabled={process.env.NODE_ENV === "development"} />
     </>
   );
 }
