@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "@/components/hospitality-chat.css";
 export const metadata: Metadata = {
   title: "The Aster House | Boutique Stay Demo",
   description:
