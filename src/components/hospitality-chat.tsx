@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
+import { FictionalChatInquiry } from "./fictional-chat-inquiry";
 
 type Mode = "connected" | "preview";
 type Entry = { role: "guest" | "assistant"; text: string };
@@ -113,6 +114,7 @@ export function HospitalityChat({ mode = "connected" }: { mode?: Mode }) {
             {busy && <p className="hospitality-chat-assistant">Checking approved hotel information…</p>}
             <div ref={endRef} />
           </div>
+          {mode === "connected" && <FictionalChatInquiry />}
           <form onSubmit={submit} className="hospitality-chat-composer">
             <label htmlFor="hospitality-chat-input" className="sr-only">Your hotel question</label>
             <input
