@@ -28,7 +28,6 @@ export const demoFiles = [
     "room-card",
     "inquiry-fields",
     "hospitality-chat",
-    "fictional-chat-inquiry",
   ].map((name) => `src/components/${name}.tsx`),
   "src/components/hospitality-chat.css",
   "src/features/hotel/home.tsx",
@@ -58,6 +57,11 @@ export async function prepareDemo(root, stage) {
   await writeFile(
     join(stage, "src/app/page.tsx"),
     'import { HotelHome } from "@/features/hotel/home";\nexport default function Home() { return <HotelHome chatMode="preview" />; }\n',
+  );
+  // The public static export must not include local-only inquiry transport.
+  await writeFile(
+    join(stage, "src/components/fictional-chat-inquiry.tsx"),
+    'export function FictionalChatInquiry() { return null; }\\n',
   );
   await writeFile(
     join(stage, "src/components/inquiry-form.tsx"),
