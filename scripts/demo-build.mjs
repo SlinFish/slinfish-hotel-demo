@@ -61,7 +61,7 @@ export async function prepareDemo(root, stage) {
   // The public static export must not include local-only inquiry transport.
   await writeFile(
     join(stage, "src/components/fictional-chat-inquiry.tsx"),
-    'export function FictionalChatInquiry() { return null; }\\n',
+    'export function FictionalChatInquiry() { return null; }\n',
   );
   await writeFile(
     join(stage, "src/components/inquiry-form.tsx"),
