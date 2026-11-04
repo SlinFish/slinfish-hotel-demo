@@ -33,6 +33,8 @@ test("H-2 form uses explicit opt-in consent and displays only confirmed stored r
 test("H-2 static showcase retains offline simulation and never stages the inquiry API route", async () => {
   const build = await source("scripts/demo-build.mjs");
   assert.match(build, /<HotelHome chatMode="preview" \/>/);
-  assert.match(build, /"fictional-chat-inquiry"/);
+  assert.match(build, /src\/components\/fictional-chat-inquiry\.tsx/);
+  assert.match(build, /export function FictionalChatInquiry\(\) \{ return null; \}/);
+  assert.doesNotMatch(build, /^\s*"fictional-chat-inquiry",/m);
   assert.doesNotMatch(build, /src\/app\/api\/assistant\/inquiry\/route\.ts/);
 });
