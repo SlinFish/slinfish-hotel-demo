@@ -56,7 +56,7 @@ export async function prepareDemo(root, stage) {
   }
   await writeFile(
     join(stage, "src/app/page.tsx"),
-    'import { HotelHome } from "@/features/hotel/home";\nexport default function Home() { return <HotelHome chatMode="preview" />; }\n',
+    `import { HotelHome } from "@/features/hotel/home";\nexport default function Home() { return <HotelHome chatMode="${process.env.PUBLIC_HOTEL_CHAT_ENABLED === "1" ? "connected" : "preview"}" />; }\n`,
   );
   await writeFile(
     join(stage, "src/components/inquiry-form.tsx"),
