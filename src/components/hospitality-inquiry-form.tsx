@@ -50,6 +50,20 @@ export function HospitalityInquiryForm({ mode, onBack }: {
     }
   }
 
+  if (saved) {
+    return (
+      <div className="hospitality-inquiry hospitality-inquiry-complete" role="status">
+        <div className="hospitality-inquiry-success-icon" aria-hidden="true">✓</div>
+        <h3>Inquiry saved</h3>
+        <p>Fictional inquiry saved locally for administrator review.</p>
+        <p>No staff notification was sent and no reservation was made.</p>
+        <button type="button" className="hospitality-inquiry-submit" onClick={onBack}>
+          Back to chat
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div className="hospitality-inquiry">
       <div className="hospitality-inquiry-toolbar">
