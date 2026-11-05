@@ -13,6 +13,10 @@ test("H-2 inquiry is opt-in and does not scrape or transmit chat history", async
   assert.match(form, /mode === "preview"/);
   assert.match(form, /stored === true/);
   assert.match(form, /response\.status === 201/);
+  assert.match(form, /if \(saved\)/);
+  assert.match(form, /Inquiry saved/);
+  assert.match(form, /Back to chat/);
+  assert.match(form, /onClick=\{onBack\}/);
   assert.doesNotMatch(form, /\/api\/assistant\/chat|entries\.map|localStorage|sessionStorage/);
 });
 
