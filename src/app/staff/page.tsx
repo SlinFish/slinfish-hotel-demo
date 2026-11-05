@@ -21,8 +21,10 @@ export default function Staff() {
   const [items, setItems] = useState<Item[]>([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [bookingsLoaded, setBookingsLoaded] = useState(false);
   async function load() {
     setLoading(true);
+    setBookingsLoaded(false);
     setError("");
     try {
       const res = await fetch("/api/staff/inquiries", {
@@ -36,6 +38,7 @@ export default function Staff() {
             : "Unable to load inquiries",
         );
       setItems((await res.json()).inquiries);
+      setBookingsLoaded(true);
     } catch (e) {
       setError(e instanceof Error ? e.message : "Unexpected error");
     } finally {
@@ -129,11 +132,8 @@ export default function Staff() {
         ))}
       </div>
       <LeadManagementPanel key={token} token={token} />
-      {!loading && !error && items.length === 0 && (
-        <p className="muted">
-          Enter the staff token to load inquiries. No sample guest records are
-          preloaded.
-        </p>
+      {!loading && !error && bookingsLoaded && items.length === 0 && (
+        <p className="muted">No booking inquiries found.</p>
       )}
     </main>
   );
