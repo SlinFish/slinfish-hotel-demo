@@ -33,6 +33,6 @@ test("H-2 inquiry route remains local-only and fixes business to hotel", async (
 test("static showcase stages only a preview form, without API backend", async () => {
   const build = await file("scripts/demo-build.mjs");
   assert.match(build, /"hospitality-inquiry-form"/);
-  assert.match(build, /<HotelHome chatMode=\\"preview\\"/);
+  assert.match(build, /<HotelHome chatMode="preview"/);
   assert.doesNotMatch(build, /"src\/app\/api\/assistant\/inquiry\/route\.ts"/);
 });
