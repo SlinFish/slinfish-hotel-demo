@@ -29,3 +29,67 @@ enum InquiryStatus {
   CONTACTED
   CLOSED
 }
+
+
+// H-3A: general inquiries are separate from legacy booking-specific Inquiry.
+// Application services must enforce tenant scope on EVERY read/write.
+model LeadInquiry {
+  id             String            @id @default(cuid())
+  businessId     String            @db.VarChar(64)
+  source         LeadInquirySource
+  name           String            @db.VarChar(100)
+  contact        String            @db.VarChar(150)
+  question       String            @db.VarChar(400)
+  consentedAt    DateTime
+  status         LeadInquiryStatus @default(NEW)
+  version        Int               @default(1)
+  idempotencyKey String?           @db.VarChar(128)
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+  expiresAt      DateTime
+  hotelStay      LeadHotelStay?
+  statusEvents   LeadInquiryStatusEvent[]
+
+  @@unique([businessId, idempotencyKey])
+  @@index([businessId, createdAt, id])
+  @@index([businessId, status, createdAt])
+  @@index([expiresAt])
+}
+
+enum LeadInquirySource {
+  CHAT_FORM
+  HOTEL_FORM
+  OTHER
+}
+
+enum LeadInquiryStatus {
+  NEW
+  CONTACTED
+  QUALIFIED
+  WON
+  LOST
+}
+
+// No invented dates or room information for chat-origin inquiries.
+model LeadHotelStay {
+  inquiryId String      @id
+  inquiry   LeadInquiry @relation(fields: [inquiryId], references: [id], onDelete: Restrict)
+  roomType  String?     @db.VarChar(100)
+  checkIn   DateTime?   @db.Date
+  checkOut  DateTime?   @db.Date
+  guests    Int?
+}
+
+model LeadInquiryStatusEvent {
+  id             String            @id @default(cuid())
+  inquiryId      String
+  inquiry        LeadInquiry       @relation(fields: [inquiryId], references: [id], onDelete: Restrict)
+  actorId        String            @db.VarChar(128)
+  previousStatus LeadInquiryStatus
+  nextStatus     LeadInquiryStatus
+  version        Int
+  createdAt      DateTime          @default(now())
+
+  @@unique([inquiryId, version])
+  @@index([inquiryId, createdAt])
+}
