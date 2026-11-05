@@ -3,6 +3,7 @@ import { ArrowIcon } from "@/components/arrow-icon";
 import Link from "next/link";
 import { useState } from "react";
 import { StatusBadge } from "@/features/inquiries/ui/status-badge";
+import { LeadManagementPanel } from "@/features/inquiries/ui/lead-management-panel";
 type Item = {
   id: string;
   guestName: string;
@@ -127,6 +128,7 @@ export default function Staff() {
           </article>
         ))}
       </div>
+      <LeadManagementPanel key={token} token={token} />
       {!loading && !error && items.length === 0 && (
         <p className="muted">
           Enter the staff token to load inquiries. No sample guest records are
