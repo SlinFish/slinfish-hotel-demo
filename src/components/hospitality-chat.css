@@ -31,3 +31,9 @@
 .hospitality-inquiry-consent input { margin-top: 3px; flex-shrink: 0; }
 .hospitality-inquiry-submit { background: #213e32; border: 0; border-radius: 6px; color: #fffef9; padding: 12px; font-size: 12px; }
 .hospitality-inquiry-feedback { font-size: 12px; line-height: 1.6; padding: 12px; background: #f0f2ea; border-radius: 6px; margin: 12px 0 0; overflow-wrap: anywhere; }
+
+.hospitality-inquiry-complete { display: flex; flex-direction: column; justify-content: center; gap: 12px; text-align: center; }
+.hospitality-inquiry-complete h3 { margin: 0; font-size: 20px; color: #213e32; }
+.hospitality-inquiry-complete p { margin: 0; font-size: 13px; line-height: 1.6; }
+.hospitality-inquiry-complete .hospitality-inquiry-submit { margin-top: 10px; cursor: pointer; }
+.hospitality-inquiry-success-icon { display: grid; place-items: center; align-self: center; width: 50px; height: 50px; border-radius: 50%; background: #e9f2e9; color: #213e32; font-size: 28px; }
