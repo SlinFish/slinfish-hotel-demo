@@ -17,3 +17,17 @@
 .hospitality-chat-footer span { font-size: 10px; color: #616b62; line-height: 1.5; }
 .hospitality-chat-footer button { color: #213e32; background: none; border: 0; text-decoration: underline; font-size: 11px; flex-shrink: 0; }
 @media (max-width: 500px) { .hospitality-chat { right: 12px; bottom: 12px; } .hospitality-chat-panel { width: calc(100vw - 24px); height: min(520px, calc(100dvh - 85px)); } }
+
+.hospitality-inquiry { flex: 1; overflow-y: auto; min-height: 0; padding: 14px; }
+.hospitality-inquiry-toolbar { display: flex; align-items: center; gap: 15px; }
+.hospitality-inquiry-toolbar button { border: 0; background: none; padding: 5px 0; text-decoration: underline; font-size: 11px; color: #213e32; }
+.hospitality-inquiry-toolbar strong { font-size: 13px; }
+.hospitality-inquiry-note { font-size: 11px; line-height: 1.6; margin: 12px 0; color: #616b62; }
+.hospitality-inquiry-form { display: flex; flex-direction: column; gap: 12px; }
+.hospitality-inquiry-form label { display: block; font-size: 11px; font-weight: 600; }
+.hospitality-inquiry-form input:not([type="checkbox"]), .hospitality-inquiry-form textarea { display: block; width: 100%; border: 1px solid #cfd5ca; background: #fff; color: #253e33; border-radius: 6px; padding: 10px; margin-top: 6px; font-size: 13px; }
+.hospitality-inquiry-form textarea { resize: vertical; min-height: 76px; }
+.hospitality-inquiry-form .hospitality-inquiry-consent { display: flex; align-items: flex-start; gap: 8px; font-weight: 400; line-height: 1.5; }
+.hospitality-inquiry-consent input { margin-top: 3px; flex-shrink: 0; }
+.hospitality-inquiry-submit { background: #213e32; border: 0; border-radius: 6px; color: #fffef9; padding: 12px; font-size: 12px; }
+.hospitality-inquiry-feedback { font-size: 12px; line-height: 1.6; padding: 12px; background: #f0f2ea; border-radius: 6px; margin: 12px 0 0; overflow-wrap: anywhere; }
