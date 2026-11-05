@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
+import { HospitalityInquiryForm } from "./hospitality-inquiry-form";
 
 type Mode = "connected" | "preview";
 type Entry = { role: "guest" | "assistant"; text: string };
@@ -18,6 +19,7 @@ export function HospitalityChat({ mode = "connected" }: { mode?: Mode }) {
   const [entries, setEntries] = useState<Entry[]>([{ role: "assistant", text: welcome }]);
   const [draft, setDraft] = useState("");
   const [busy, setBusy] = useState(false);
+  const [inquiryOpen, setInquiryOpen] = useState(false);
   const context = useRef<{ handle: string; sequence: number } | null>(null);
   const pending = useRef<AbortController | null>(null);
   const generation = useRef(0);
@@ -39,6 +41,7 @@ export function HospitalityChat({ mode = "connected" }: { mode?: Mode }) {
     context.current = null;
     setBusy(false);
     setDraft("");
+    setInquiryOpen(false);
     setEntries([{ role: "assistant", text: welcome }]);
     // The server's short-lived topic will expire; no customer history is persisted.
   }
@@ -104,6 +107,9 @@ export function HospitalityChat({ mode = "connected" }: { mode?: Mode }) {
             </div>
             <button type="button" onClick={() => setOpen(false)} aria-label="Close assistant">×</button>
           </div>
+          {inquiryOpen ? (
+            <HospitalityInquiryForm mode={mode} onBack={() => setInquiryOpen(false)} />
+          ) : <>
           <div className="hospitality-chat-history" role="log" aria-live="polite" aria-relevant="additions text">
             {entries.map((entry, index) => (
               <p key={index} className={entry.role === "guest" ? "hospitality-chat-guest" : "hospitality-chat-assistant"}>
@@ -127,9 +133,10 @@ export function HospitalityChat({ mode = "connected" }: { mode?: Mode }) {
             <button type="submit" disabled={!draft.trim() || busy}>Send</button>
           </form>
           <div className="hospitality-chat-footer">
-            <span>No booking or staff notification is made.</span>
+            <button type="button" onClick={() => setInquiryOpen(true)} disabled={busy}>Leave an inquiry</button>
             <button type="button" onClick={reset}>Reset chat</button>
           </div>
+          </>}
         </section>
       )}
       <button

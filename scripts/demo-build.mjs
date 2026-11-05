@@ -28,6 +28,7 @@ export const demoFiles = [
     "room-card",
     "inquiry-fields",
     "hospitality-chat",
+    "hospitality-inquiry-form",
   ].map((name) => `src/components/${name}.tsx`),
   "src/components/hospitality-chat.css",
   "src/features/hotel/home.tsx",
